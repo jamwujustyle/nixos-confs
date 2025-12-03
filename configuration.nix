@@ -41,8 +41,9 @@
 services.xserver = {
   enable = true;
   windowManager.qtile.enable = true;
+
   displayManager.sessionCommands = ''
-    xwallpaper --zoom ~/Downloads/chinatown.png
+    xwallpaper --zoom images/anime_skull.png
     xset r rate 200 35 &
     eval $(gnome-keyring-daemon --start --components=pkcs11,secrets,ssh)
     export SSH_AUTH_SOCK
@@ -54,9 +55,22 @@ services.xserver = {
 	fade = true;
 	};
 
+# Add PipeWire audio here:
+security.rtkit.enable = true;
+services.pipewire = {
+  enable = true;
+  alsa.enable = true;
+  alsa.support32Bit = true;
+  pulse.enable = true;
+  jack.enable = true;
+};
+
+
+
   #new
-  services.gnome.gnome-keyring.enable = true;
-  
+  services.gnome.gnome-keyring = {
+	enable = true;
+};   
 
   # Configure keymap in X11
   # services.xserver.xkb.layout = "us";
@@ -79,11 +93,13 @@ services.xserver = {
   # Define a user account. Don't forget to set a password with ‘passwd’.
  users.users.lord = {
    isNormalUser = true;
-   extraGroups = [ "wheel" "networkmanager" "video" ]; # Enable ‘sudo’ for the user.
+   extraGroups = [ "wheel" "networkmanager" "video" "audio" ]; 
    packages = with pkgs; [
      tree
    ];
  };
+
+
 
  programs.firefox.enable = true;
 
@@ -101,12 +117,25 @@ services.xserver = {
 	rofi
 	brightnessctl
 	jetbrains.goland
+	
+	#go stuff
 	go
 	gopls
 	go-tools
 	delve
 	golangci-lint
-
+	
+	obs-studio
+	v4l-utils  # for webcam
+	telegram-desktop
+	
+	#audio bullshit
+	pipewire
+	mpv
+	alsa-utils
+	pavucontrol
+	pulseaudio
+	google-chrome
 ];
 
 
