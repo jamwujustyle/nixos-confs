@@ -62,7 +62,7 @@ services.pipewire = {
 
  users.users.lord = {
    isNormalUser = true;
-   extraGroups = [ "wheel" "networkmanager" "video" "audio" ]; 
+   extraGroups = [ "wheel" "networkmanager" "video" "audio" "docker"  ]; 
    packages = with pkgs; [
      tree
    ];
@@ -74,6 +74,9 @@ programs = {
           starship.enable = true;
   }; 
 
+virtualisation.docker.enable = true;
+
+
  environment.systemPackages = with pkgs; [
    vim 
    wget
@@ -82,12 +85,14 @@ programs = {
 	git
 vscode 
 inputs.antigravity-nix.packages.${pkgs.system}.default
+conda
 	btop
 	gedit
 	xwallpaper
 	pcmanfm
 	rofi
 	brightnessctl
+	just
 	
 	#go stuff
 	go

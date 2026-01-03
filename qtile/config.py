@@ -6,6 +6,9 @@ from libqtile.utils import guess_terminal
 mod = "mod4"
 terminal = "alacritty"
 
+touchpad_device = "ELAN1200:00 04F3:30BA Touchpad"
+touchpad_toggle_cmd = f"sh -c 'xinput list-props \"{touchpad_device}\" | grep -q \"Device Enabled.*:.*1\" && xinput disable \"{touchpad_device}\" || xinput enable \"{touchpad_device}\"'"
+
 keys = [
     Key([mod], "h", lazy.layout.left(), desc="Move focus to left"),
     Key([mod], "l", lazy.layout.right(), desc="Move focus to right"),
@@ -64,7 +67,12 @@ keys = [
     Key([], "XF86AudioMute", lazy.spawn("pactl set-sink-mute @DEFAULT_SINK@ toggle")),
     Key([], "XF86MonBrightnessUp", lazy.spawn("brightnessctl set +5%")),
     Key([], "XF86MonBrightnessDown", lazy.spawn("brightnessctl set 5%-")),
-    Key([], "XF86TouchpadToggle", lazy.spawn("touchpad-toggle-script")),
+    Key(
+        [mod],
+        "F10", 
+        lazy.spawn(touchpad_toggle_cmd), 
+        desc="Toggle Touchpad"
+    ),
 ]
 
 
@@ -126,7 +134,6 @@ screens = [
     Screen(
         bottom=bar.Bar(
             [
-                widget.CurrentLayout(),
                 widget.GroupBox(),
                 widget.Prompt(),
                 widget.WindowName(),
@@ -136,6 +143,7 @@ screens = [
                     },
                     name_transform=lambda name: name.upper(),
                 ),
+		widget.CurrentLayout(),
                 widget.Systray(),
 		widget.Battery(
                      battery="BAT0",
