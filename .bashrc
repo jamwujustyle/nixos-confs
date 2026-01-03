@@ -1,4 +1,3 @@
-alias life='cat /sys/class/power_supply/BAT0/capacity'
 alias config='sudo nano /etc/nixos/configuration.nix'
 alias bashrc='nano ~/.bashrc'
 alias rebuild='sudo nixos-rebuild switch'
@@ -29,7 +28,4 @@ update-dots () {
 
 rollback-qtile () {
 	cp -R ~/nixos-dotfiles/qtile ~/.config
-}
-br () {
-	brightnessctl set ${1}%
 }

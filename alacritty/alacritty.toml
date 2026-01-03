@@ -1,5 +1,5 @@
 [window]
-opacity = 0.9
+opacity = 0.8
 
 [font]
 size = 12.0
@@ -16,4 +16,20 @@ style = "Bold"
 family = "JetBrains Mono"
 style = "Italic"
 
+[keyboard]
+bindings = [
+    # Map Ctrl+C to Copy
+    { key = "C", mods = "Control", action = "Copy" },
+    # Map Ctrl+V to Paste
+    { key = "V", mods = "Control", action = "Paste" },
 
+    # Move the Interrupt Signal (SigKill/Interrupt) to Ctrl+Shift+C
+    # This allows you to still stop your Django/FastAPI server
+    { key = "C", mods = "Control|Shift", chars = "\u0003" },
+
+    # Move the Suspend Signal (SIGTSTP) to Ctrl+Shift+Z
+    { key = "Z", mods = "Control|Shift", chars = "\u001a" },
+    
+    # Move the EOF/Exit Signal to Ctrl+Shift+D (Optional)
+    { key = "D", mods = "Control|Shift", chars = "\u0004" }
+]

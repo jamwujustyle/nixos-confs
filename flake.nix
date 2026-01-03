@@ -4,6 +4,11 @@
   inputs = {
     # We use unstable for the latest packages (Go, VSCode, etc.)
     nixpkgs.url = "github:nixos/nixpkgs/nixos-unstable";
+    
+    antigravity-nix = {
+	url = "github:jacopone/antigravity-nix";
+	inputs.nixpkgs.follows = "nixpkgs";
+	};
   };
 
   outputs = { self, nixpkgs, ... }@inputs: {
